@@ -1,7 +1,7 @@
 # CS241-Graph_cut-algorithm
 The final project of SJTU CS241 (2020 fall)
 
-![Alt text](https://github.com/INTE-W/CS241-Graph_cut-algorithm/blob/main/Project.jpg）
+![image](https://github.com/INTE-W/CS241-Graph_cut-algorithm/blob/main/Project.jpg）
 
 （一）开发一个图自动生成器
 
