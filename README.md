@@ -1,6 +1,8 @@
 # CS241-Graph_cut-algorithm
 The final project of SJTU CS241 (2020 fall)
 
+![Alt text](https://github.com/INTE-W/CS241-Graph_cut-algorithm/raw/master/Project.png）
+
 （一）开发一个图自动生成器
 
     （1）随机生成一个有向图，将图放置到指定文件中，每一行如下格式
