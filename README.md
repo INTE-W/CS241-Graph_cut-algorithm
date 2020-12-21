@@ -1,4 +1,7 @@
-## 要求
+# CS241 2020 fall final
+
+
+## 作业要求说明（instruction）：
 ![Project.jpg](https://i.loli.net/2020/12/22/uW8owFq6GVr2Pyf.jpg)
 
 ## 功能主页面：
