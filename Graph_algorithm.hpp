@@ -2,17 +2,17 @@
 #define Graph_G
 
 #include <iostream>
-#include<fstream>
+#include <fstream>
 #include <cassert>
-#include<string>
-#include<vector>
-#include<ctype.h>
-#include<stdlib.h>
-#include<time.h>
-#include<queue>
-#include<stack>
-#include<cmath>
-#include<algorithm>
+#include <string>
+#include <vector>
+#include <ctype.h>
+#include <stdlib.h>
+#include <time.h>
+#include <queue>
+#include <stack>
+#include <cmath>
+#include <algorithm>
 
 const double inf = 9999999.0;
 using namespace std;
@@ -31,11 +31,11 @@ struct tableHead
 
 struct edge
 {
-	int p_f;//出发节点
-	int p_e;//结束节点
+	int p_f;	  //出发节点
+	int p_e;	  //结束节点
 	double weigh; //权重
 
-	bool operator <(const edge& x) const
+	bool operator<(const edge &x) const
 	{
 		return weigh < x.weigh;
 	}
@@ -43,8 +43,8 @@ struct edge
 
 struct edge_inter
 {
-	int p_f;//出发节点
-	int p_e;//结束节点
+	int p_f;	  //出发节点
+	int p_e;	  //结束节点
 	double weigh; //权重
 	string graph_num;
 };
@@ -54,26 +54,26 @@ class Graph_solution
 private:
 	int num_line;
 	string file_name;
-	tableHead adj[6005]; //原图邻接表（有向）
-	tableHead anti_adj[6005]; //对应的反向图的邻接链表
-	vector<int> node; //标记存在节点
-	int visit[6001] = { 0 }; //dfs时判断是否访问过
-	int connect[6001] = { 0 }; //连通的节点的值相等
-	vector<int>* subgraph_node=new vector<int>[6001]; //子图节点存储
-	vector<edge>* Inner = new vector<edge>[6000]; //子图内部边
-	vector<edge_inter>* Inter = new vector<edge_inter>[6000]; //子图交互边
-	int cnt = 0; //所切子图的个数
+	tableHead adj[6005];									  //原图邻接表（有向）
+	tableHead anti_adj[6005];								  //对应的反向图的邻接链表
+	vector<int> node;										  //标记存在节点
+	int visit[6001] = {0};									  //dfs时判断是否访问过
+	int connect[6001] = {0};								  //连通的节点的值相等
+	vector<int> *subgraph_node = new vector<int>[6001];		  //子图节点存储
+	vector<edge> *Inner = new vector<edge>[6000];			  //子图内部边
+	vector<edge_inter> *Inter = new vector<edge_inter>[6000]; //子图交互边
+	int cnt = 0;											  //所切子图的个数
 	double ans = 0.0;
-	vector<int> Reach_node; //可到达点集
-	vector<edge> Graph_edge; //全边集
-	vector<edge> Intersec; //交互边
-	tableHead graph_table[6000];   //建立空图邻接表subgraph_table;
+	vector<int> Reach_node;		 //可到达点集
+	vector<edge> Graph_edge;	 //全边集
+	vector<edge> Intersec;		 //交互边
+	tableHead graph_table[6000]; //建立空图邻接表subgraph_table;
 	tableHead anti_graph_table[6000];
 	tableHead Reachable[6000];
 	vector<int> subnode; //有向图中可到节点集
-	double dis[6000] = { 0 };
-	bool vis[6000] = { 0 };
-	//dfs求连通分量+存连通子图内的边  
+	double dis[6000] = {0};
+	bool vis[6000] = {0};
+	//dfs求连通分量+存连通子图内的边
 	void dfs(int x, int u)
 	{
 		visit[x] = 1;
@@ -97,9 +97,9 @@ private:
 		}
 	}
 
-
 public:
-	Graph_solution() {
+	Graph_solution()
+	{
 		num_line = 0;
 		file_name = "";
 		for (int i = 0; i < 6005; i++)
@@ -110,7 +110,7 @@ public:
 			anti_adj[i].edge_arry.clear();
 		}
 
-	}//约定节点数最多为6000个，编号范围0~5999
+	} //约定节点数最多为6000个，编号范围0~5999
 
 	void add_edge(int x, int y, double wi)
 	{
@@ -152,11 +152,13 @@ public:
 				double weight = 0;
 				p_derive = (rand() % 6000) / 60;
 				p_end = (rand() % 6000) / 60;
-				weight += rand() % 100 + 1;//每条边的权值范围1~100
+				weight += rand() % 100 + 1; //每条边的权值范围1~100
 				weight += double(rand() / (double)RAND_MAX);
 				add_edge(p_derive, p_end, weight);
-				if (find(node.begin(), node.end(), p_derive) == node.end()) node.push_back(p_derive);
-				if (find(node.begin(), node.end(), p_end) == node.end()) node.push_back(p_end);
+				if (find(node.begin(), node.end(), p_derive) == node.end())
+					node.push_back(p_derive);
+				if (find(node.begin(), node.end(), p_end) == node.end())
+					node.push_back(p_end);
 				file << "<" << p_derive << " " << p_end << " " << weight << ">" << endl;
 			}
 		}
@@ -185,7 +187,7 @@ public:
 			{
 				t1 += pow(10, ss.size() - j - 1) * (ss[j] - '0');
 			}
-			if(find(node.begin(),node.end(),t1)==node.end())
+			if (find(node.begin(), node.end(), t1) == node.end())
 				node.push_back(t1);
 			if (str[i] == '>')
 				continue;
@@ -261,11 +263,13 @@ public:
 				double weight = 0;
 				p_derive = (rand() % 6000) / 60;
 				p_end = (rand() % 6000) / 60;
-				weight += rand() % 100 + 1;//每条边的权值范围1~100
+				weight += rand() % 100 + 1; //每条边的权值范围1~100
 				weight += double(rand() / (double)RAND_MAX);
 				add_edge(p_derive, p_end, weight);
-				if (find(node.begin(), node.end(), p_derive) == node.end()) node.push_back(p_derive);
-				if (find(node.begin(), node.end(), p_end) == node.end()) node.push_back(p_end);
+				if (find(node.begin(), node.end(), p_derive) == node.end())
+					node.push_back(p_derive);
+				if (find(node.begin(), node.end(), p_end) == node.end())
+					node.push_back(p_end);
 				file << "<" << p_derive << " " << p_end << " " << weight << ">" << endl;
 			}
 		}
@@ -303,10 +307,10 @@ public:
 			}
 		}
 	}
-	void  Graph_cut(string file, int n)
+	void Graph_cut(string file, int n)
 	{
 		int temp2 = 0;
-		Read_In(file);//读取到adj，anti_adj与node中
+		Read_In(file); //读取到adj，anti_adj与node中
 		for (int i = 0; i < 6001; i++)
 		{
 			if (find(node.begin(), node.end(), i) != node.end())
@@ -332,13 +336,12 @@ public:
 					if (flag)
 						Graph_edge.push_back(tem);
 				}
-
 			}
 		}
 
 		priority_queue<edge> edge_order;
 		edge tmp;
-		bool* flag2 = new bool[Graph_edge.size()];
+		bool *flag2 = new bool[Graph_edge.size()];
 		for (int i = 0; i < Graph_edge.size(); i++)
 		{
 			flag2[i] = true;
@@ -348,7 +351,7 @@ public:
 		{
 			tmp.p_e = Graph_edge[j].p_e;
 			tmp.p_f = Graph_edge[j].p_f;
-			tmp.weigh =Graph_edge[j].weigh;
+			tmp.weigh = Graph_edge[j].weigh;
 			//检查方向相反的重边
 			for (int k = j + 1; k < Graph_edge.size(); k++)
 			{
@@ -360,10 +363,10 @@ public:
 					break;
 				}
 			}
-			if(flag2[j])
+			if (flag2[j])
 				edge_order.push(tmp);
 		}
-		delete[]flag2;
+		delete[] flag2;
 		//简单无向图（无重边）的分割（贪心算法） O(n)
 
 		for (int j = 0; j < 6000; j++)
@@ -376,7 +379,7 @@ public:
 		int count = edge_order.size();
 		while (count--)
 		{
-			int _visit[6000] = { 0 };
+			int _visit[6000] = {0};
 			edge current = edge_order.top();
 			edge_order.pop();
 			tableBody tb;
@@ -434,7 +437,7 @@ public:
 		}
 		for (int i = 0; i < Intersec.size(); i++)
 		{
-			ans+= Intersec[i].weigh;
+			ans += Intersec[i].weigh;
 		}
 		//优化：O(n^3)判断交换两个子图中两点，交互是否减小
 		int p1, p2, p3, p4;
@@ -458,15 +461,15 @@ public:
 						for (int q = 0; q < subgraph_node[j].size(); q++)
 						{
 							//判断交换subgraph_node[i][k]和subgraph_node[j][q]边权值是否变小
-							 minus = 0;
-							 plus = 0;
+							minus = 0;
+							plus = 0;
 							for (int r = 0; r < adj[subgraph_node[i][k]].edge_arry.size(); r++)
 							{
-								if (connect[adj[subgraph_node[i][k]].edge_arry[r].num2_node] == i&& adj[subgraph_node[i][k]].edge_arry[r].num2_node != subgraph_node[i][k]) //自环不增加权重
+								if (connect[adj[subgraph_node[i][k]].edge_arry[r].num2_node] == i && adj[subgraph_node[i][k]].edge_arry[r].num2_node != subgraph_node[i][k]) //自环不增加权重
 								{
 									plus += adj[subgraph_node[i][k]].edge_arry[r].weight;
 								}
-								 if (connect[adj[subgraph_node[i][k]].edge_arry[r].num2_node] == j&& adj[subgraph_node[i][k]].edge_arry[r].num2_node != subgraph_node[j][q])
+								if (connect[adj[subgraph_node[i][k]].edge_arry[r].num2_node] == j && adj[subgraph_node[i][k]].edge_arry[r].num2_node != subgraph_node[j][q])
 								{
 									minus += adj[subgraph_node[i][k]].edge_arry[r].weight;
 								}
@@ -477,7 +480,7 @@ public:
 								{
 									plus += anti_adj[subgraph_node[i][k]].edge_arry[r].weight;
 								}
-								 if (connect[anti_adj[subgraph_node[i][k]].edge_arry[r].num2_node] == j && anti_adj[subgraph_node[i][k]].edge_arry[r].num2_node != subgraph_node[j][q])
+								if (connect[anti_adj[subgraph_node[i][k]].edge_arry[r].num2_node] == j && anti_adj[subgraph_node[i][k]].edge_arry[r].num2_node != subgraph_node[j][q])
 								{
 									minus += anti_adj[subgraph_node[i][k]].edge_arry[r].weight;
 								}
@@ -488,7 +491,7 @@ public:
 								{
 									plus += adj[subgraph_node[j][q]].edge_arry[r].weight;
 								}
-								 if (connect[adj[subgraph_node[j][q]].edge_arry[r].num2_node] == i&& adj[subgraph_node[j][q]].edge_arry[r].num2_node != subgraph_node[i][k])
+								if (connect[adj[subgraph_node[j][q]].edge_arry[r].num2_node] == i && adj[subgraph_node[j][q]].edge_arry[r].num2_node != subgraph_node[i][k])
 								{
 									minus += adj[subgraph_node[j][q]].edge_arry[r].weight;
 								}
@@ -499,13 +502,13 @@ public:
 								{
 									plus += anti_adj[subgraph_node[j][q]].edge_arry[r].weight;
 								}
-								 if (connect[anti_adj[subgraph_node[j][q]].edge_arry[r].num2_node] == i&& anti_adj[subgraph_node[j][q]].edge_arry[r].num2_node != subgraph_node[i][k])
+								if (connect[anti_adj[subgraph_node[j][q]].edge_arry[r].num2_node] == i && anti_adj[subgraph_node[j][q]].edge_arry[r].num2_node != subgraph_node[i][k])
 								{
 									minus += anti_adj[subgraph_node[j][q]].edge_arry[r].weight;
 								}
 							}
-							
-							if (gap<minus-plus)
+
+							if (gap < minus - plus)
 							{
 								flag = true;
 								//cout << plus << " " << -minus << endl;
@@ -546,7 +549,6 @@ public:
 						break;
 					}
 				}
-				
 			}
 		}
 		//输出验证
@@ -577,7 +579,7 @@ public:
 			}
 			cout << trmp1 << " " << trmp2 << endl;
 			cout << minus << endl;*/
-	
+
 		get_subgraph();
 		//cout << p1 << " " << p3 << endl;
 
@@ -589,8 +591,8 @@ public:
 			file << "----------The inner situation of the subgraph:----------- " << endl;
 			if (Inner[i].size() == 0)
 			{
-				for(int j=0;j<subgraph_node[i].size();j++)
-				    file << "<" << subgraph_node[i][j] << ">" << endl;
+				for (int j = 0; j < subgraph_node[i].size(); j++)
+					file << "<" << subgraph_node[i][j] << ">" << endl;
 			}
 			else
 			{
@@ -603,12 +605,10 @@ public:
 			file << "----------The Interactive edge of the subgraph:-----------" << endl;
 			for (int j = 0; j < Inter[i].size(); j++)
 			{
-				file <<"<" << Inter[i][j].p_f << " " <<Inter[i][j].graph_num<<":" <<Inter[i][j].p_e << " " << Inter[i][j].weigh << ">"  << endl;
+				file << "<" << Inter[i][j].p_f << " " << Inter[i][j].graph_num << ":" << Inter[i][j].p_e << " " << Inter[i][j].weigh << ">" << endl;
 			}
 			file.close();
 		}
-
-
 	}
 
 	double Intersetion()
@@ -618,7 +618,7 @@ public:
 
 	void Accessible(string ss)
 	{
-		string sub_file_name="";
+		string sub_file_name = "";
 		int pos = 0;
 		while (ss[pos] != ':')
 		{
@@ -628,7 +628,7 @@ public:
 		string ttp = sub_file_name;
 		sub_file_name += ".txt";
 		int num = 0;
-		for (int i = pos+1; i < ss.size(); i++)
+		for (int i = pos + 1; i < ss.size(); i++)
 		{
 			num += (ss[i] - '0') * pow(10, ss.size() - i - 1);
 		}
@@ -643,12 +643,15 @@ public:
 		string str = "";
 		while (getline(infile, str))
 		{
-			if (str[0] != '<'||str=="") continue;
+			if (str[0] != '<' || str == "")
+				continue;
 			else
 			{
 				int pp = 1;
-				while (str[pp] != ' '&& str[pp] !='>') pp++;
-				if (str[pp] == '>') continue;
+				while (str[pp] != ' ' && str[pp] != '>')
+					pp++;
+				if (str[pp] == '>')
+					continue;
 				int tmp = 0;
 				for (int i = 1; i < pp; i++)
 					tmp += (str[i] - '0') * pow(10, pp - i - 1);
@@ -658,7 +661,8 @@ public:
 					int tp = pp;
 					if (str[pp] != 'G') //内部边
 					{
-						while (str[pp] != ' ') pp++;
+						while (str[pp] != ' ')
+							pp++;
 						int tmp2 = 0;
 						for (int i = tp; i < pp; i++)
 							tmp2 += (str[i] - '0') * pow(10, pp - i - 1);
@@ -671,7 +675,7 @@ public:
 					}
 					else
 					{
-						string dp="";
+						string dp = "";
 						while (str[pp] != ' ')
 						{
 							dp += str[pp];
@@ -729,15 +733,18 @@ public:
 		string str = "";
 		while (getline(infile, str))
 		{
-			if (str[0] != '<' || str == "") continue;
+			if (str[0] != '<' || str == "")
+				continue;
 			else
 			{
 				int pp = 1;
-				while (str[pp] != ' '&&str[pp]!='>') pp++;
+				while (str[pp] != ' ' && str[pp] != '>')
+					pp++;
 				int tmp = 0;
 				for (int i = 1; i < pp; i++)
 					tmp += (str[i] - '0') * pow(10, pp - i - 1);
-				if (str[pp] == '>') continue;
+				if (str[pp] == '>')
+					continue;
 				tableBody adj_edge;
 				if (tmp == num)
 				{
@@ -745,7 +752,8 @@ public:
 					int tp = pp;
 					if (str[pp] != 'G') //内部边
 					{
-						while (str[pp] != ' ') pp++;
+						while (str[pp] != ' ')
+							pp++;
 						int tmp2 = 0;
 						for (int i = tp; i < pp; i++)
 							tmp2 += (str[i] - '0') * pow(10, pp - i - 1);
@@ -775,17 +783,17 @@ public:
 						if (adj_edge.num2_node != num)
 						{
 							bool fg = true;
-							int loc=0;
+							int loc = 0;
 							for (int i = 0; i < Reachable[num].edge_arry.size(); i++)
 							{
-								if (Reachable[num].edge_arry[i].num2_node == adj_edge.num2_node) 
+								if (Reachable[num].edge_arry[i].num2_node == adj_edge.num2_node)
 								{
 									fg = false;
 									loc = i;
 									break;
 								}
 							}
-							if(fg)
+							if (fg)
 								Reachable[num].edge_arry.push_back(adj_edge);
 							else
 							{
@@ -801,7 +809,6 @@ public:
 							string con = tpp + ":" + to_string(tmp2);
 							Read_In2(con);
 						}
-						
 					}
 					else
 					{
@@ -929,7 +936,7 @@ public:
 		{
 			pos++;
 		}
-			
+
 		num = 0;
 		for (int ii = pos + 1; ii < _end.size(); ii++)
 		{
@@ -947,7 +954,7 @@ public:
 		if (gg)
 		{
 			cout << "The shortest path is: " << endl;
-			cout<< dis[num];
+			cout << dis[num];
 		}
 		else
 		{
@@ -968,24 +975,27 @@ public:
 			string str = "";
 			while (getline(infile, str))
 			{
-				if (flag1 )
+				if (flag1)
 				{
 					cout << ss1 << " (please press 1 to search the nodes it can reach)" << endl;
 					return;
 				}
-				if (str == "") break;
-				else if (str[0] != '<') continue;
+				if (str == "")
+					break;
+				else if (str[0] != '<')
+					continue;
 				else
 				{
 					int pp = 1;
-					while (str[pp] != ' '&&str[pp]!='>') pp++;
+					while (str[pp] != ' ' && str[pp] != '>')
+						pp++;
 					int tmp1 = 0;
 					for (int k = 1; k < pp; k++)
 						tmp1 += (str[k] - '0') * pow(10, pp - k - 1);
-					
+
 					if (str[pp] == '>')
 					{
-						if (!flag1 && x == tmp1 )
+						if (!flag1 && x == tmp1)
 						{
 							ss1 += ("G" + to_string(i) + ":" + to_string(x));
 							flag1 = true;
@@ -996,7 +1006,8 @@ public:
 						pp++;
 						int tmp2 = 0;
 						int tp = pp;
-						while (str[pp] != ' ') pp++;
+						while (str[pp] != ' ')
+							pp++;
 						for (int k = tp; k < pp; k++)
 							tmp2 += (str[k] - '0') * pow(10, pp - k - 1);
 
@@ -1010,10 +1021,14 @@ public:
 			}
 			infile.close();
 		}
-		if (!flag1 ) { cout << "This node is not in the graph! Please 0 to end the program!" << endl; return; }
+		if (!flag1)
+		{
+			cout << "This node is not in the graph! Please 0 to end the program!" << endl;
+			return;
+		}
 	}
 
-	void Shortest_path2(int x, int y,int num_gra)
+	void Shortest_path2(int x, int y, int num_gra)
 	{
 		bool flag1 = false;
 		bool flag2 = false;
@@ -1032,23 +1047,26 @@ public:
 					cout << ss1 << "  " << ss2;
 					return;
 				}
-				if (str == "") break;
-				else if (str[0] != '<') continue;
+				if (str == "")
+					break;
+				else if (str[0] != '<')
+					continue;
 				else
 				{
 					int pp = 1;
-					while (str[pp] != ' '&&str[pp]!='>') pp++;
+					while (str[pp] != ' ' && str[pp] != '>')
+						pp++;
 					int tmp1 = 0;
 					for (int k = 1; k < pp; k++)
 						tmp1 += (str[k] - '0') * pow(10, pp - k - 1);
 					if (str[pp] == '>')
 					{
-						if (!flag1 && x == tmp1 )
+						if (!flag1 && x == tmp1)
 						{
 							ss1 += ("G" + to_string(i) + ":" + to_string(x));
 							flag1 = true;
 						}
-						if (!flag2 && y == tmp1 )
+						if (!flag2 && y == tmp1)
 						{
 							ss2 += ("G" + to_string(i) + ":" + to_string(y));
 							flag2 = true;
@@ -1058,7 +1076,8 @@ public:
 					{
 						pp++;
 						int tp = pp;
-						while (str[pp] != ' ') pp++;
+						while (str[pp] != ' ')
+							pp++;
 						int tmp2 = 0;
 						for (int k = tp; k < pp; k++)
 							tmp2 += (str[k] - '0') * pow(10, pp - k - 1);
@@ -1077,19 +1096,29 @@ public:
 			}
 			infile.close();
 		}
-		if (!flag1 && !flag2)     {cout << "These two nodes are not in the graph!" << endl; return;}
-		else if (!flag1 && flag2) { cout << "The first node is not in the graph!" << endl; return; }
-		else if (flag1 && !flag2) { cout << "The second node is not in the graph!" << endl; return; }
+		if (!flag1 && !flag2)
+		{
+			cout << "These two nodes are not in the graph!" << endl;
+			return;
+		}
+		else if (!flag1 && flag2)
+		{
+			cout << "The first node is not in the graph!" << endl;
+			return;
+		}
+		else if (flag1 && !flag2)
+		{
+			cout << "The second node is not in the graph!" << endl;
+			return;
+		}
 	}
 
 	~Graph_solution()
 	{
-		delete[]subgraph_node;
-		delete[]Inner;
-		delete[]Inter;
+		delete[] subgraph_node;
+		delete[] Inner;
+		delete[] Inter;
 	};
 };
 
-
-
-#endif 
+#endif
