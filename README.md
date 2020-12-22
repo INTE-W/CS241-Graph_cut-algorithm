@@ -11,7 +11,7 @@
 		2.Add lines in an exsited Graph (Press 2)
 		3.Graph_cut Algorithm (Press 3)
 		4.Accessible nodes (Press 4)
-		5.Shortest path (Press 5)***
+		5.Shortest path (Press 5）
 
 
 ## 功能操作介绍
