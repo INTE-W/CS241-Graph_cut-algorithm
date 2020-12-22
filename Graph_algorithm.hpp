@@ -16,7 +16,7 @@
 
 const double inf = 9999999.0;
 using namespace std;
-
+int way[6000];
 struct tableBody
 {
 	int num2_node;
@@ -137,7 +137,7 @@ public:
 			//when r1=1, generate a node. Otherwise, generate an edge
 			if (r1)
 			{
-				int number = (rand() % 6000) / 60;
+				int number = (rand() % 6000) / 10;
 				/*while (find(node.begin(), node.end(), number) != node.end())
 				{
 					number = rand() % 6000;
@@ -150,8 +150,8 @@ public:
 			{
 				int p_derive, p_end;
 				double weight = 0;
-				p_derive = (rand() % 6000) / 60;
-				p_end = (rand() % 6000) / 60;
+				p_derive = (rand() % 6000) / 10;
+				p_end = (rand() % 6000) / 10;
 				weight += rand() % 100 + 1; //每条边的权值范围1~100
 				weight += double(rand() / (double)RAND_MAX);
 				add_edge(p_derive, p_end, weight);
@@ -248,7 +248,7 @@ public:
 			//when r1=1, generate a node. Otherwise, generate an edge
 			if (r1)
 			{
-				int number = (rand() % 6000) / 60;
+				int number = (rand() % 6000) / 10;
 				/*while (find(node.begin(), node.end(), number) != node.end())
 				{
 					number = rand() % 6000;
@@ -261,8 +261,8 @@ public:
 			{
 				int p_derive, p_end;
 				double weight = 0;
-				p_derive = (rand() % 6000) / 60;
-				p_end = (rand() % 6000) / 60;
+				p_derive = (rand() % 6000) / 10;
+				p_end = (rand() % 6000) / 10;
 				weight += rand() % 100 + 1; //每条边的权值范围1~100
 				weight += double(rand() / (double)RAND_MAX);
 				add_edge(p_derive, p_end, weight);
@@ -444,7 +444,7 @@ public:
 		bool flag;
 		double minus = 0.0;
 		double plus = 0.0;
-		for (int tt = 0; tt < 100; tt++)
+		for (int tt = 0; tt < 50; tt++)
 		{
 			p1 = 0;
 			p2 = 0;
@@ -926,6 +926,7 @@ public:
 				{
 					if (!vis[Reachable[minp].edge_arry[u].num2_node] && dis[Reachable[minp].edge_arry[u].num2_node] > dis[minp] + Reachable[minp].edge_arry[u].weight)
 					{
+						way[Reachable[minp].edge_arry[u].num2_node]=minp;
 						dis[Reachable[minp].edge_arry[u].num2_node] = dis[minp] + Reachable[minp].edge_arry[u].weight;
 					}
 				}
