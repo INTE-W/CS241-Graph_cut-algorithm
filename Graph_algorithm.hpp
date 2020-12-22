@@ -2,6 +2,7 @@
 #define Graph_G
 
 #include <iostream>
+#include<iomanip>
 #include <fstream>
 #include <cassert>
 #include <string>
@@ -127,6 +128,8 @@ public:
 		num_line = x;
 		file_name = str;
 		ofstream file;
+		file.setf(ios::fixed, ios::floatfield); // 设定为 fixed 模式，以小数点表示浮点数
+		file.precision(5);						// 设置精度 5
 		file.open(file_name);
 		node.clear();
 		srand(time(0));
@@ -214,7 +217,7 @@ public:
 					ss += str[i];
 					i++;
 				}
-				double wi = 0.0;
+				double wi = 0.00000;
 				for (int j = 0; j < ss.size(); j++)
 				{
 					wi += pow(10, ss.size() - j - 1) * (ss[j] - '0');
@@ -239,6 +242,8 @@ public:
 		Read_In(_file);
 		num_line += y;
 		ofstream file;
+		file.setf(ios::fixed, ios::floatfield); // 设定为 fixed 模式，以小数点表示浮点数
+		file.precision(5);						// 设置精度 5
 		file.open(file_name, ios::app);
 		srand(time(0));
 		int r1;
@@ -587,6 +592,8 @@ public:
 		{
 			string file_name = "G" + to_string(i) + ".txt";
 			ofstream file;
+			file.setf(ios::fixed, ios::floatfield); // 设定为 fixed 模式，以小数点表示浮点数
+			file.precision(5);						// 设置精度 5
 			file.open(file_name);
 			file << "----------The inner situation of the subgraph:----------- " << endl;
 			if (Inner[i].size() == 0)
@@ -765,7 +772,7 @@ public:
 							str2 += str[pp];
 							pp++;
 						}
-						double wi = 0.0;
+						double wi = 0.00000;
 						for (int j = 0; j < str2.size(); j++)
 						{
 							wi += pow(10, str2.size() - j - 1) * (str2[j] - '0');
@@ -926,7 +933,7 @@ public:
 				{
 					if (!vis[Reachable[minp].edge_arry[u].num2_node] && dis[Reachable[minp].edge_arry[u].num2_node] > dis[minp] + Reachable[minp].edge_arry[u].weight)
 					{
-						way[Reachable[minp].edge_arry[u].num2_node]=minp;
+						way[Reachable[minp].edge_arry[u].num2_node] = minp;
 						dis[Reachable[minp].edge_arry[u].num2_node] = dis[minp] + Reachable[minp].edge_arry[u].weight;
 					}
 				}
@@ -955,7 +962,8 @@ public:
 		if (gg)
 		{
 			cout << "The shortest path is: " << endl;
-			cout << dis[num];
+
+			cout<<fixed<<setprecision(5)<<dis[num]<<endl; ;
 		}
 		else
 		{
