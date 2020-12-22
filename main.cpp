@@ -93,6 +93,23 @@ int main()
 			cin >> str1 >> str2;
 			example.Read_In2(str1);
 			example.Dijkstra(str1, str2);
+			cout<<endl;
+			int pri[6000];
+			int _=0;
+			int r=en;
+			int s=st;
+			pri[_++]=en;
+			while(r!=s)
+			{
+				pri[_++]=way[r];
+				r=way[r];
+			}
+			for(int i=_-1;i>=0;i--)
+			{
+				if(i!=_-1)
+					cout<<"->";
+				cout<<pri[i];
+			}
 		}
 
 	}
