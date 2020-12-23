@@ -449,7 +449,7 @@ public:
 		bool flag;
 		double minus = 0.0;
 		double plus = 0.0;
-		for (int tt = 0; tt < 50; tt++)
+		for (int tt = 0; tt < 100; tt++)
 		{
 			p1 = 0;
 			p2 = 0;
@@ -555,6 +555,11 @@ public:
 					}
 				}
 			}
+			else
+			{
+				break;
+			}
+			
 		}
 		//输出验证
 		/*minus = 0;
